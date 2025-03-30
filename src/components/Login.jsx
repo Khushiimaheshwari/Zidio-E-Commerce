@@ -52,11 +52,9 @@ const Login = () => {
           Password: formData.password,
         }))
         .then( () => {
-          console.log("Login Successful")
           navigate("/");
         })
-        .catch((err) => console.error(err)
-      );
+        .catch((err) => console.error(err));
 
       setFormData({email: '', password: '' });
       

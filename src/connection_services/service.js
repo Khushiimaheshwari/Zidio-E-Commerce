@@ -1,5 +1,13 @@
 const apiService = {
   login: async (credentials) => {
+
+    if (!credentials.Email || !credentials.Password) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    console.log("Sending credentials:", credentials);
+
     const response = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -12,9 +20,13 @@ const apiService = {
       throw new Error(errorData.error || "Login failed");
     }
 
+    const data = await response.json();
+    console.log("Response from server: ",data);
     console.log("Login Successful!");
 
-    return await response.json();
+    alert("Login Successful!")
+
+    return data;
   },
 
   signup: async(credentials) => {
@@ -24,7 +36,7 @@ const apiService = {
       return;
     }
 
-    console.log("📤 Sending credentials:", credentials);
+    console.log("Sending credentials:", credentials);
 
     const response = await fetch("http://localhost:5000/signup", {
         method: "POST",
@@ -41,7 +53,6 @@ const apiService = {
 
     const data = await response.json();
     console.log("Response from server:", data);
-    
     console.log("SignUp Successful!");
 
     return data;

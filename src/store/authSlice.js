@@ -39,7 +39,6 @@ export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.acti
 export default authSlice.reducer;
 
 export const loginUser = (credentials) => async (dispatch) => {
-  console.log("Currently in authSlice.js");
   dispatch(loginStart());
   try {
     const response = await apiService.login(credentials);
