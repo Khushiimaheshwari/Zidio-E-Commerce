@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ShoppingCart, Menu, X, User, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 const Home_PageMain = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
