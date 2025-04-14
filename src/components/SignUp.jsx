@@ -62,7 +62,7 @@ const SignUp = () => {
       })
 
       alert("SignUp Successful")
-      navigate("/");
+      navigate("/avatar");
   
       setFormData({username: '', email: '', password: '' });
 

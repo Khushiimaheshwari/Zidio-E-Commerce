@@ -9,7 +9,8 @@ dotenv.config();
 const userSchema = new mongoose.Schema({
     Name: { type: String, required: true },
     Email: { type: String, required: true, unique: true, trim: true },
-    Password: { type: String, required: true }
+    Password: { type: String, required: true },
+    Avatar: { type: String, default: "default.png" }
 });
 
 const User = mongoose.model("User", userSchema);
@@ -30,10 +31,11 @@ async function ensureDBConnection() {
 
 export class AuthService {
     
-    async createAccount({Name, Email, Password }) {
+    async createAccount({Name, Email, Password, Avatar }) {
         await ensureDBConnection(); 
             
         try {
+
             if (!Name || !Email || !Password) {
                 throw new Error("Missing required fields: Email, Password, or Name");
             }
@@ -47,8 +49,8 @@ export class AuthService {
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(Password, saltRounds);
 
-            console.log("Creating user:", { Name, Email, Password: hashedPassword });
-            const newUser = new User({ Name, Email, Password: hashedPassword });
+            console.log("Creating user:", { Name, Email, Password: hashedPassword, Avatar });
+            const newUser = new User({ Name, Email, Password: hashedPassword, Avatar });
             await newUser.save();
 
             const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });

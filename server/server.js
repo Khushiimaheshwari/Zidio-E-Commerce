@@ -88,4 +88,18 @@ connectDB()
           res.status(400).json({ error: error.message });
       }
   });
+
+  // Avatar
+  app.patch("/profile", authenticateuserData, async (req, res) => {
+    try {
+        const { id } = req.user;
+        const { Name, Avatar } = req.body;
+
+        const updatedUser = await User.findByIdAndUpdate(id, { Name, Avatar }, { new: true });
+        res.json({ message: "Profile updated", user: updatedUser });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
     

@@ -1,11 +1,11 @@
 {
-  "name": "zidio-task-management-project",
+  "name": "zidio-e-commerce-project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server/server.js",        
-    "client": "vite",                        
+    "start": "node server/server.js",
+    "client": "vite",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
     "build": "vite build",
     "lint": "eslint .",
@@ -17,6 +17,7 @@
     "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.488.0",
     "mongoose": "^8.12.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

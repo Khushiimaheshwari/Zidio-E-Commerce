@@ -8,6 +8,9 @@ import LoginPage from './pages/LoginPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
+import Avatar_Page from './pages/Avatar_Page.jsx'
+import ShopPage from './pages/Shop_Page.jsx'
+import CollectionsPage from './pages/Collection_Page.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
     {
       path: '/signup',
       element: <SignUpPage/>
+    },
+    {
+      path: '/avatar',
+      element: <Avatar_Page/>
+    },
+    {
+      path: '/shop',
+      element: <ShopPage/>
+    },
+    {
+      path: '/collections',
+      element: <CollectionsPage/>
     }
   ]}
 ])
