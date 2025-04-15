@@ -97,16 +97,14 @@ export class AuthService {
         }
     }
 
-    async logout() {
+    async logout(token) {
         try {
             if (!token) throw new Error("Token is required for logout");
     
-            // Decode token to get expiration date
             const decoded = jwt.decode(token);
             if (!decoded || !decoded.exp) throw new Error("Invalid token");
     
-            // Save token in blacklist with expiration time
-            const expiresAt = new Date(decoded.exp * 1000); // Convert to milliseconds
+            const expiresAt = new Date(decoded.exp * 1000); 
             await BlacklistedToken.create({ token, expiresAt });
     
             return { message: "User logged out successfully" };

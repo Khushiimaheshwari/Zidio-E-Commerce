@@ -1,16 +1,46 @@
-import React, { useState } from 'react'
-import Container from '../Container/Container'
-import { Link, useNavigate } from 'react-router-dom'
-import { Search, ShoppingCart, Menu, X, User } from 'lucide-react'
+import React, { useState, useRef, useEffect } from 'react';
+import Container from '../Container/Container';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, ShoppingCart, Menu, X, User, Heart, Package, LogOut, LogIn } from 'lucide-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../store/authSlice';
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     
-    // For demo purposes, assuming user is not logged in
-    const isLoggedIn = false;
-    // Mock cart count
+    const { isAuthenticated, user } = useSelector(state => state.auth);
     const cartCount = 3;
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        }
+        
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownRef]);
+
+    const handleLogout = async () => {
+        try {
+            // Call your logout API if needed
+            // await apiService.logout();
+            
+            // Dispatch logout action to Redux
+            dispatch(logout());
+            setIsDropdownOpen(false);
+            navigate('/');
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
     return (
         <header className='sticky top-0 z-10 w-full bg-gray-900 text-white shadow-md'>
@@ -27,8 +57,7 @@ function Header() {
                     {/* Logo */}
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center">
-                            {/* Replace with your actual logo or use text */}
-                            <h1 className="text-2xl font-bold text-red-500">MARVEL<span className="text-white">WEAR</span></h1>
+                            <h1 className="text-2xl font-bold text-red-500">MARVEL<span className="text-white">STORE</span></h1>
                         </Link>
                     </div>
                     
@@ -58,21 +87,96 @@ function Header() {
                                 <Search size={20} />
                             </button>
                         </li>
-                        <li>
-                            {isLoggedIn ? (
-                                <button 
-                                    className="hover:text-red-500 transition-colors"
-                                    onClick={() => navigate("/account")}
+                        <li className="relative" ref={dropdownRef}>
+                            <button 
+                                className="hover:text-red-500 transition-colors flex items-center"
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                onMouseEnter={() => setIsDropdownOpen(true)}
+                            >
+                                <User size={20} />
+                            </button>
+                            
+                            {/* Dropdown menu */}
+                            {isDropdownOpen && (
+                                <div 
+                                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20"
+                                    onMouseLeave={() => setIsDropdownOpen(false)}
                                 >
-                                    <User size={20} />
-                                </button>
-                            ) : (
-                                <button 
-                                    className="hover:text-red-500 transition-colors px-4 py-1 border border-red-500 rounded-md"
-                                    onClick={() => navigate("/login")}
-                                >
-                                    Login
-                                </button>
+                                    {isAuthenticated ? (
+                                        <>
+                                            <Link
+                                                to="/profile"
+                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={() => setIsDropdownOpen(false)}
+                                            >
+                                                <User size={16} className="mr-2" />
+                                                Profile
+                                            </Link>
+                                            <Link
+                                                to="/wishlist"
+                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={() => setIsDropdownOpen(false)}
+                                            >
+                                                <Heart size={16} className="mr-2" />
+                                                Wishlist
+                                            </Link>
+                                            <Link
+                                                to="/orders"
+                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={() => setIsDropdownOpen(false)}
+                                            >
+                                                <Package size={16} className="mr-2" />
+                                                Orders
+                                            </Link>
+                                            <button
+                                                className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={handleLogout}
+                                            >
+                                                <LogOut size={16} className="mr-2" />
+                                                Logout
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Link
+                                                to="/login"
+                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={() => setIsDropdownOpen(false)}
+                                            >
+                                                <LogIn size={16} className="mr-2" />
+                                                Login
+                                            </Link>
+                                            <Link
+                                                to="/signup"
+                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={() => setIsDropdownOpen(false)}
+                                            >
+                                                <LogIn size={16} className="mr-2" />
+                                                Sign Up
+                                            </Link>
+                                            <div className="border-t border-gray-100 my-1"></div>
+                                            <div className="px-4 py-2 text-xs text-gray-500">
+                                                Sign in to access:
+                                            </div>
+                                            <Link
+                                                to="/profile"
+                                                className="flex items-center px-4 py-2 text-sm text-gray-400"
+                                                onClick={() => setIsDropdownOpen(false)}
+                                            >
+                                                <User size={16} className="mr-2" />
+                                                Profile
+                                            </Link>
+                                            <div className="flex items-center px-4 py-2 text-sm text-gray-400">
+                                                <Heart size={16} className="mr-2" />
+                                                Wishlist
+                                            </div>
+                                            <div className="flex items-center px-4 py-2 text-sm text-gray-400">
+                                                <Package size={16} className="mr-2" />
+                                                Orders
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
                             )}
                         </li>
                         <li>
@@ -142,25 +246,12 @@ function Header() {
                                     Contact
                                 </Link>
                             </li>
-                            {!isLoggedIn && (
-                                <li>
-                                    <button 
-                                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors w-full text-left"
-                                        onClick={() => {
-                                            setIsMenuOpen(false);
-                                            navigate("/login");
-                                        }}
-                                    >
-                                        Login
-                                    </button>
-                                </li>
-                            )}
                         </ul>
                     </Container>
                 </div>
             )}
         </header>
-    )
+    );
 }
 
 export default Header;

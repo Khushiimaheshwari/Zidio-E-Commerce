@@ -4,6 +4,7 @@ import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import Avatar_Page from './pages/Avatar_Page';
 
 function App() {
 
@@ -11,12 +12,12 @@ function App() {
 
   const isLoginPage = location.pathname === "/login";
   const isSignUpPage = location.pathname === "/signup";
-  const isAvatarPage = location.pathname === "/";
+  const isAvatarPage = location.pathname === "/avatar";
 
   return (
     <div 
       className={` w-full ${
-        isLoginPage || isSignUpPage ? "h-185 bg-gradient-to-tl from-sky-300 to-sky-100" : "h-full bg-white"
+        isLoginPage || isSignUpPage ? "h-185 bg-gray-100" : "h-full bg-white"
       }`}
     >
       <div className="w-full text-center">
@@ -27,6 +28,10 @@ function App() {
         ) : isSignUpPage ? (
           <main>
             <SignUpPage />
+          </main>
+        ) : isAvatarPage ? (
+          <main>
+            <Avatar_Page />
           </main>
         ) : (
           <>
@@ -43,18 +48,3 @@ function App() {
 }
 
 export default App
-
-// function App() {
-
-//   return(
-//     <div>
-//       <Header/>
-//       <main>
-//           <Outlet/>
-//       </main>
-//       <Footer/>
-//     </div>
-//   )
-// }
-
-// export default App

@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Home_PageMain = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [heroImageIndex, setHeroImageIndex] = useState(0);
-  
-  // Marvel-themed color scheme
-  const colors = {
-    primary: '#ED1D24', // Marvel red
-    secondary: '#0D47A1', // Deep blue
-    accent: '#FFD700', // Gold
-    dark: '#202020',
-    light: '#FFFFFF'
-  };
+  const navigate = useNavigate(); 
 
   // Featured hero banners
   const heroImages = [
@@ -81,23 +73,13 @@ const Home_PageMain = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleClick = () => {  
+    window.scrollTo(0, 0); 
+    navigate('/collections');  
+  };  
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-gray-900 z-20 pt-16">
-          <div className="container mx-auto px-4">
-            <nav className="flex flex-col space-y-6 py-8">
-              <a href="#" className="text-white text-xl hover:text-red-500 transition-colors">Home</a>
-              <a href="#" className="text-white text-xl hover:text-red-500 transition-colors">Shop</a>
-              <a href="#" className="text-white text-xl hover:text-red-500 transition-colors">Collections</a>
-              <a href="#" className="text-white text-xl hover:text-red-500 transition-colors">About</a>
-              <a href="#" className="text-white text-xl hover:text-red-500 transition-colors">Contact</a>
-            </nav>
-          </div>
-        </div>
-      )}
       
       {/* Hero Slider */}
       <div className={`relative ${heroImages[heroImageIndex].bgClass} text-white py-16 md:py-32 overflow-hidden transition-all duration-500`}>
@@ -179,7 +161,7 @@ const Home_PageMain = () => {
             ))}
           </div>
           <div className="text-center mt-8">
-            <a href="#" className="inline-flex items-center text-red-500 font-bold hover:text-red-600 transition-colors">
+            <a href="/shop" className="inline-flex items-center text-red-500 font-bold hover:text-red-600 transition-colors">
               View All Products <ChevronRight size={16} className="ml-1" />
             </a>
           </div>
@@ -193,9 +175,12 @@ const Home_PageMain = () => {
             <div className="md:w-1/2 mb-8 md:mb-0">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">THE AVENGERS COLLECTION</h2>
               <p className="text-lg mb-6">Assemble your wardrobe with our exclusive Avengers-inspired collection. Premium quality clothing for everyday heroes.</p>
-              <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 transition-colors">
-                SHOP THE COLLECTION
-              </button>
+                <button 
+                    onClick={handleClick}
+                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 transition-colors">
+                    SHOP THE COLLECTION
+                </button>
+              
             </div>
             <div className="md:w-1/2 flex justify-center">
               <img src="/api/placeholder/500/300" alt="Avengers Collection" className="rounded-lg shadow-lg" />
@@ -255,10 +240,7 @@ const Home_PageMain = () => {
             </button>
           </div>
         </div>
-      </section>
-      
-      {/* Footer */}
-      
+      </section>      
     </div>
   );
 };

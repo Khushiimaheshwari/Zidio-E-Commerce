@@ -15,12 +15,17 @@ function SelectAvatar() {
     setSelectedAvatar(avatar);
   }, [navigate]);
 
+  const continueWithSelectedAvatar = () => {
+    alert('Avatar Selected Successfully!')
+    navigate('/');
+  }
+
   return (
-    <div className="flex flex-col items-center bg-gray-100 min-h-screen p-8">
+    <div className="flex flex-col justify-center items-center bg-gray-100 min-h-screen p-8">
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12 p-2">Choose Your Avatar</h2>
         
-        <div className="grid md:grid-cols-5 sm:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-5 sm:grid-cols-4 gap-4 mb-10">
           {superheroAvatars.map((avatar) => (
             <div key={avatar} className="flex justify-center">
               <div 
@@ -52,7 +57,7 @@ function SelectAvatar() {
         {selectedAvatar && (
           <div className="mt-8 flex justify-center">
             <button 
-              onClick={() => navigate('/')}
+              onClick={continueWithSelectedAvatar}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
               Continue with Selected Avatar

@@ -56,6 +56,28 @@ const apiService = {
     console.log("SignUp Successful!");
 
     return data;
+  },
+
+  logout: async (token) => {
+    try {
+      const response = await fetch('/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Logout failed');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw error;
+    }
   }
 };
 

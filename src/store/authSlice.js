@@ -47,3 +47,19 @@ export const loginUser = (credentials) => async (dispatch) => {
     dispatch(loginFailure(error.message || "Login failed"));
   }
 };
+
+export const logoutUser = () => async (dispatch, getState) => {
+  try {
+    const { token } = getState().auth;
+    if (token) {
+      await apiService.logout(token);
+    }
+    
+    localStorage.removeItem('token');
+    
+    dispatch(logout());
+  } catch (error) {
+    console.error("Logout failed:", error);
+    dispatch(logout());
+  }
+};
