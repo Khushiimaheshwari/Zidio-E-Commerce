@@ -43,7 +43,7 @@ function Header() {
     };
 
     return (
-        <header className='sticky top-0 z-10 w-full bg-gray-900 text-white shadow-md'>
+        <header className='sticky top-0 z-10 w-full bg-slate-950 text-white shadow-md'>
             <Container>
                 <nav className='flex items-center justify-between py-4'>
                     {/* Mobile menu button */}
@@ -57,39 +57,40 @@ function Header() {
                     {/* Logo */}
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center">
-                            <h1 className="text-2xl font-bold text-red-500">MARVEL<span className="text-white">STORE</span></h1>
+                            {/* <h1 className="text-2xl font-bold text-red-500">MARVEL<span className="text-white">STORE</span></h1> */}
+                            <img src="logo.png" width={"50"} alt="" />
                         </Link>
                     </div>
                     
                     {/* Desktop navigation */}
                     <ul className="hidden md:flex items-center space-x-8">
                         <li>
-                            <Link to="/" className="hover:text-red-500 transition-colors font-medium">Home</Link>
+                            <Link to="/" className="hover:text-lime-100 transition-colors font-medium">Home</Link>
                         </li>
                         <li>
-                            <Link to="/shop" className="hover:text-red-500 transition-colors font-medium">Shop</Link>
+                            <Link to="/shop" className="hover:text-lime-100 transition-colors font-medium">Shop</Link>
                         </li>
                         <li>
-                            <Link to="/collections" className="hover:text-red-500 transition-colors font-medium">Collections</Link>
+                            <Link to="/collections" className="hover:text-lime-100 transition-colors font-medium">Collections</Link>
                         </li>
                         <li>
-                            <Link to="/about" className="hover:text-red-500 transition-colors font-medium">About</Link>
+                            <Link to="/about" className="hover:text-lime-100 transition-colors font-medium">About</Link>
                         </li>
                         <li>
-                            <Link to="/contact" className="hover:text-red-500 transition-colors font-medium">Contact</Link>
+                            <Link to="/contact" className="hover:text-lime-100 transition-colors font-medium">Contact</Link>
                         </li>
                     </ul>
                     
                     {/* Right side icons and buttons */}
                     <ul className="flex items-center space-x-4">
                         <li>
-                            <button className="hover:text-red-500 transition-colors">
+                            <button className="hover:text-lime-100 transition-colors">
                                 <Search size={20} />
                             </button>
                         </li>
                         <li className="relative" ref={dropdownRef}>
                             <button 
-                                className="hover:text-red-500 transition-colors flex items-center"
+                                className="hover:text-lime-100 transition-colors flex items-center"
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 onMouseEnter={() => setIsDropdownOpen(true)}
                             >
@@ -106,7 +107,7 @@ function Header() {
                                         <>
                                             <Link
                                                 to="/profile"
-                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <User size={16} className="mr-2" />
@@ -114,7 +115,7 @@ function Header() {
                                             </Link>
                                             <Link
                                                 to="/wishlist"
-                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <Heart size={16} className="mr-2" />
@@ -122,14 +123,14 @@ function Header() {
                                             </Link>
                                             <Link
                                                 to="/orders"
-                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <Package size={16} className="mr-2" />
                                                 Orders
                                             </Link>
                                             <button
-                                                className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                className="flex items-center w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                                                 onClick={handleLogout}
                                             >
                                                 <LogOut size={16} className="mr-2" />
@@ -140,7 +141,7 @@ function Header() {
                                         <>
                                             <Link
                                                 to="/login"
-                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <LogIn size={16} className="mr-2" />
@@ -148,29 +149,29 @@ function Header() {
                                             </Link>
                                             <Link
                                                 to="/signup"
-                                                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <LogIn size={16} className="mr-2" />
                                                 Sign Up
                                             </Link>
-                                            <div className="border-t border-gray-100 my-1"></div>
-                                            <div className="px-4 py-2 text-xs text-gray-500">
+                                            <div className="border-t border-slate-100 my-1"></div>
+                                            <div className="px-4 py-2 text-xs text-slate-500">
                                                 Sign in to access:
                                             </div>
                                             <Link
                                                 to="/profile"
-                                                className="flex items-center px-4 py-2 text-sm text-gray-400"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-400"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <User size={16} className="mr-2" />
                                                 Profile
                                             </Link>
-                                            <div className="flex items-center px-4 py-2 text-sm text-gray-400">
+                                            <div className="flex items-center px-4 py-2 text-sm text-slate-400">
                                                 <Heart size={16} className="mr-2" />
                                                 Wishlist
                                             </div>
-                                            <div className="flex items-center px-4 py-2 text-sm text-gray-400">
+                                            <div className="flex items-center px-4 py-2 text-sm text-slate-400">
                                                 <Package size={16} className="mr-2" />
                                                 Orders
                                             </div>
@@ -181,12 +182,12 @@ function Header() {
                         </li>
                         <li>
                             <button 
-                                className="relative hover:text-red-500 transition-colors"
+                                className="relative hover:text-lime-100 transition-colors"
                                 onClick={() => navigate("/cart")}
                             >
                                 <ShoppingCart size={20} />
                                 {cartCount > 0 && (
-                                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                                    <span className="absolute -top-2 -right-2 bg-rose-400 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                                         {cartCount}
                                     </span>
                                 )}
@@ -204,7 +205,7 @@ function Header() {
                             <li>
                                 <Link 
                                     to="/" 
-                                    className="block hover:text-red-500 transition-colors"
+                                    className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     Home
@@ -213,7 +214,7 @@ function Header() {
                             <li>
                                 <Link 
                                     to="/shop" 
-                                    className="block hover:text-red-500 transition-colors"
+                                    className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     Shop
@@ -222,7 +223,7 @@ function Header() {
                             <li>
                                 <Link 
                                     to="/collections" 
-                                    className="block hover:text-red-500 transition-colors"
+                                    className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     Collections
@@ -231,7 +232,7 @@ function Header() {
                             <li>
                                 <Link 
                                     to="/about" 
-                                    className="block hover:text-red-500 transition-colors"
+                                    className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     About
@@ -240,7 +241,7 @@ function Header() {
                             <li>
                                 <Link 
                                     to="/contact" 
-                                    className="block hover:text-red-500 transition-colors"
+                                    className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     Contact
@@ -250,6 +251,7 @@ function Header() {
                     </Container>
                 </div>
             )}
+        <hr />
         </header>
     );
 }

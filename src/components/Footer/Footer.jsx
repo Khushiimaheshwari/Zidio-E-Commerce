@@ -2,13 +2,13 @@ import React from 'react'
 
 function Footer() {
     return (
-        <footer className="bg-gray-900 text-white pt-12 pb-6">
+        <footer className=" bg-slate-950 text-white pt-12 pb-6">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
+            <div className='flex flex-col items-center'>
               <h3 className="text-xl font-bold mb-4">MARVELWEAR</h3>
               <p className="text-gray-400 mb-4">Your one-stop shop for premium Marvel-themed men's clothing and accessories.</p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 ">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">Facebook</span>
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+
+    --shadow-tealShadow: 10px 10px 2000px 120px #77fff2;
+    --shadow-cyanShadow: 10px 10px 2000px 120px #9beeff;
+    --shadow-indigoShadow: 10px 10px 2000px 120px #D1B6FF;
+    --shadow-roseShadow: 10px 20px 2000px 120px #ff95ab;
+    --shadow-violetShadow: 10px 20px 2000px 120px #A78BFA;
+    --shadow-fuchsiaShadow: 10px 20px 2000px 120px #FBB1CE;
+    --shadow-amberShadow: 10px 20px 2000px 120px #ffdf8c;
+    --shadow-limeShadow: 10px 20px 2000px 120px #D7FCD8;
+}
+
+/* --breakpoint-sm: 330px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px; */
+
+    

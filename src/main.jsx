@@ -12,6 +12,7 @@ import Avatar_Page from './pages/Avatar_Page.jsx'
 import ShopPage from './pages/Shop_Page.jsx'
 import CollectionsPage from './pages/Collection_Page.jsx'
 import ProfilePage from './pages/Profile_Page.jsx'
+import WishlistPage from './pages/Wishlist_Page.jsx'
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
     {
       path: '/collections',
       element: <CollectionsPage/>
+    },
+    {
+      path: '/wishlist',
+      element: <WishlistPage/>
     }
   ]}
 ])
