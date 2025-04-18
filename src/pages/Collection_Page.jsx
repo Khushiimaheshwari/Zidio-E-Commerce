@@ -9,7 +9,7 @@ const CollectionsPage = () => {
       id: 'avengers',
       name: 'The Avengers Collection',
       description: 'Assemble your wardrobe with our premium Avengers-inspired apparel. Features designs based on Earth\'s Mightiest Heroes.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/avengers_collection.jpg',
       productCount: 24,
       featured: true
     },
@@ -17,7 +17,7 @@ const CollectionsPage = () => {
       id: 'spider-man',
       name: 'Spider-Man Collection',
       description: 'Swing into style with our exclusive Spider-Man merchandise. Web-slinging designs for the friendly neighborhood hero in all of us.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/spiderman_collection.jpeg',
       productCount: 18,
       featured: true
     },
@@ -25,7 +25,7 @@ const CollectionsPage = () => {
       id: 'x-men',
       name: 'X-Men Collection',
       description: 'Unleash your mutant style with our X-Men inspired clothing line. Gear up like the extraordinary heroes.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/mens_collection.avif',
       productCount: 15,
       featured: true
     },
@@ -33,7 +33,7 @@ const CollectionsPage = () => {
       id: 'guardians',
       name: 'Guardians of the Galaxy',
       description: 'Rock the cosmos with our Guardians-inspired collection. Perfect for fans of the galaxy\'s most unlikely heroes.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/GuardiansOfGalaxy.webp',
       productCount: 12,
       featured: false
     },
@@ -41,7 +41,7 @@ const CollectionsPage = () => {
       id: 'captain-america',
       name: 'Captain America Legacy',
       description: 'Show your patriotic side with our Captain America collection. Shield designs and vintage Americana for true believers.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/CaptainAmericaLegacy.jpg',
       productCount: 16,
       featured: false
     },
@@ -49,7 +49,7 @@ const CollectionsPage = () => {
       id: 'iron-man',
       name: 'Iron Man Tech',
       description: 'Suit up with our cutting-edge Iron Man designs. High-tech apparel inspired by Tony Stark\'s iconic armor.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/IronManTech.jpeg',
       productCount: 14,
       featured: false
     },
@@ -57,7 +57,7 @@ const CollectionsPage = () => {
       id: 'black-panther',
       name: 'Wakanda Forever',
       description: 'Honor the legacy of Wakanda with our Black Panther collection. Sleek designs inspired by vibranium technology.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/wakandaforever.jpg',
       productCount: 12,
       featured: false
     },
@@ -65,7 +65,7 @@ const CollectionsPage = () => {
       id: 'thor',
       name: 'Thor Asgardian Legends',
       description: 'Channel the power of thunder with our Thor-inspired collection. Worthy designs for fans of the God of Thunder.',
-      image: '/api/placeholder/600/400',
+      image: './HomePage/thorasgardianlegends.webp',
       productCount: 10,
       featured: false  
     }
@@ -76,13 +76,13 @@ const CollectionsPage = () => {
   const regularCollections = collections.filter(collection => !collection.featured);
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-16">
+    <div className="bg-slate-950 min-h-screen pb-16 text-gray-200">
       {/* Hero Banner */}
-      <div className="bg-gray-900 text-white">
+      <div className="flex bg-slate-900 text-white">
         <div className="container mx-auto px-4">
-          <div className="py-16 md:py-24">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Marvel Collections</h1>
-            <p className="text-xl text-gray-300 max-w-2xl">
+          <div className="flex flex-col py-16 md:py-24 justify-center items-center gap-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-teal-100 via-lime-200 to-fuchsia-300 bg-clip-text text-transparent">Marvel Collections</h1>
+            <p className="text-xl text-orange-100 max-w-2xl">
               Explore our exclusive Marvel-themed collections. Find the perfect outfit to showcase your favorite superhero.
             </p>
           </div>
@@ -92,13 +92,13 @@ const CollectionsPage = () => {
       {/* Featured Collections */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">Featured Collections</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-white">Featured Collections</h2>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
             {featuredCollections.map((collection, index) => (
               <div 
                 key={collection.id}
-                className={`relative overflow-hidden rounded-lg shadow-lg ${
+                className={`relative overflow-hidden rounded-lg shadow-lg border border-lime-100 ${
                   index === 0 ? "lg:col-span-3" : ""
                 }`}
               >
@@ -109,13 +109,13 @@ const CollectionsPage = () => {
                       alt={collection.name} 
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-90"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       <h3 className="text-2xl font-bold text-white mb-2">{collection.name}</h3>
                       <p className="text-gray-200 mb-4">{collection.description}</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-white text-sm">{collection.productCount} Products</span>
-                        <span className="text-white flex items-center text-sm font-medium hover:text-red-400 transition-colors">
+                        <span className="text-gray-300 text-sm">{collection.productCount} Products</span>
+                        <span className="text-red-300 flex items-center text-sm font-medium hover:text-red-400 transition-colors">
                           Explore Collection <ChevronRight size={16} className="ml-1" />
                         </span>
                       </div>
@@ -131,14 +131,14 @@ const CollectionsPage = () => {
       {/* All Collections */}
       <section className="pb-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">All Collections</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-white">All Collections</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularCollections.map((collection) => (
               <Link 
                 key={collection.id}
                 to={`/collections/${collection.id}`}
-                className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+                className="group bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 border border-slate-700"
               >
                 <div className="relative h-56">
                   <img 
@@ -148,43 +148,19 @@ const CollectionsPage = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-rose-300 transition-colors">
                     {collection.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{collection.description}</p>
+                  <p className="text-gray-300 mb-4 line-clamp-2">{collection.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-500">{collection.productCount} Products</span>
-                    <span className="text-red-600 flex items-center text-sm font-medium group-hover:translate-x-1 transition-transform">
+                    <span className="text-sm text-gray-400">{collection.productCount} Products</span>
+                    <span className="text-rose-300 hover:text-rose-400 flex items-center text-sm font-medium group-hover:translate-x-1 transition-transform">
                       View Collection <ChevronRight size={16} className="ml-1" />
                     </span>
                   </div>
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Newsletter Signup */}
-      <section className="container mx-auto px-4 mt-16">
-        <div className="bg-gray-900 rounded-xl p-8 md:p-12">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Subscribe for Exclusive Updates
-            </h2>
-            <p className="text-gray-300 mb-8">
-              Be the first to know about new Marvel collections, limited editions, and special offers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="px-4 py-3 rounded-lg flex-grow focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-              <button className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg transition-colors">
-                Subscribe
-              </button>
-            </div>
           </div>
         </div>
       </section>

@@ -223,7 +223,7 @@ const Home_PageMain = () => {
       </section>
       
       {/* Features */}
-      <section className="py-16 bg-slate-950">
+      <section className="py-16 bg-slate-950 mb-15">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -256,24 +256,7 @@ const Home_PageMain = () => {
           </div>
         </div>
       </section>
-      
-      {/* Newsletter */}
-      <section className="py-16 bg-slate-950">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-2">JOIN OUR NEWSLETTER</h2>
-          <p className="text-gray-300 mb-6 max-w-lg mx-auto">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
-          <div className="flex flex-col sm:flex-row max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              className="flex-grow px-4 py-3 rounded-l sm:rounded-r-none mb-2 sm:mb-0 focus:outline-none bg-gray-800 text-white border border-gray-700"
-            />
-            <button className="bg-rose-400 text-white font-bold py-3 px-6 rounded-r sm:rounded-l-none hover:bg-rose-500 transition-all duration-300">
-              SUBSCRIBE
-            </button>
-          </div>
-        </div>
-      </section>   
+    
     </div>
   );
 };
