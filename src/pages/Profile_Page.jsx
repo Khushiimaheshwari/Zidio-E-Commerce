@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { User, Mail, MapPin, Phone, Camera, Home, Settings, PlusCircle, Trash2, Edit, Save, X } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 export default function ProfilePage() {
   const [activePanel, setActivePanel] = useState('personal');
   const [isEditing, setIsEditing] = useState(false);
   const [editingAddressIndex, setEditingAddressIndex] = useState(null);
-  
+  const { darkMode } = useTheme();
+
   const [user, setUser] = useState({
     name: 'John Doe',
     email: 'john.doe@example.com',
@@ -100,7 +102,7 @@ export default function ProfilePage() {
       ...address,
       isDefault: i === index
     }));
-    
+
     setFormData(prev => ({
       ...prev,
       addresses: updatedAddresses
@@ -110,12 +112,12 @@ export default function ProfilePage() {
   const handleDeleteAddress = (index) => {
     const updatedAddresses = [...formData.addresses];
     updatedAddresses.splice(index, 1);
-    
+
     // If we deleted the default address, make the first one the default (if there is one)
     if (updatedAddresses.length > 0 && !updatedAddresses.some(a => a.isDefault)) {
       updatedAddresses[0].isDefault = true;
     }
-    
+
     setFormData(prev => ({
       ...prev,
       addresses: updatedAddresses
@@ -124,22 +126,22 @@ export default function ProfilePage() {
 
   const handleAddNewAddress = () => {
     const newId = Math.max(0, ...formData.addresses.map(a => a.id)) + 1;
-    
+
     // If this is the first address, make it default
     if (formData.addresses.length === 0) {
       newAddress.isDefault = true;
     }
-    
+
     const updatedAddresses = [
       ...formData.addresses,
       { ...newAddress, id: newId }
     ];
-    
+
     setFormData(prev => ({
       ...prev,
       addresses: updatedAddresses
     }));
-    
+
     setNewAddress({
       type: 'Home',
       street: '',
@@ -148,7 +150,7 @@ export default function ProfilePage() {
       zipCode: '',
       isDefault: false
     });
-    
+
     setAddingNewAddress(false);
   };
 
@@ -167,7 +169,7 @@ export default function ProfilePage() {
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Personal Details</h2>
               {!isEditing ? (
-                <button 
+                <button
                   onClick={() => setIsEditing(true)}
                   className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
                 >
@@ -262,7 +264,7 @@ export default function ProfilePage() {
                       <p className="font-medium">{user.name}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md">
                     <Mail size={20} className="text-gray-500" />
                     <div>
@@ -270,7 +272,7 @@ export default function ProfilePage() {
                       <p className="font-medium">{user.email}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-md">
                     <Phone size={20} className="text-gray-500" />
                     <div>
@@ -283,14 +285,14 @@ export default function ProfilePage() {
             )}
           </div>
         );
-      
+
       case 'addresses':
         return (
           <div className="bg-white p-6 rounded-lg shadow-md">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">My Addresses</h2>
               {!addingNewAddress && editingAddressIndex === null && (
-                <button 
+                <button
                   onClick={() => setAddingNewAddress(true)}
                   className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
                 >
@@ -306,8 +308,8 @@ export default function ProfilePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">Address Type</label>
-                    <select 
-                      value={newAddress.type} 
+                    <select
+                      value={newAddress.type}
                       onChange={(e) => handleNewAddressChange('type', e.target.value)}
                       className="w-full p-2 border rounded-md"
                     >
@@ -316,7 +318,7 @@ export default function ProfilePage() {
                       <option value="Other">Other</option>
                     </select>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">Street Address</label>
                     <input
@@ -327,7 +329,7 @@ export default function ProfilePage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">City</label>
                     <input
@@ -338,7 +340,7 @@ export default function ProfilePage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">State</label>
                     <input
@@ -349,7 +351,7 @@ export default function ProfilePage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">ZIP Code</label>
                     <input
@@ -360,7 +362,7 @@ export default function ProfilePage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2 flex items-center">
                     <label className="inline-flex items-center">
                       <input
@@ -373,7 +375,7 @@ export default function ProfilePage() {
                     </label>
                   </div>
                 </div>
-                
+
                 <div className="flex justify-end gap-3">
                   <button
                     onClick={() => setAddingNewAddress(false)}
@@ -402,8 +404,8 @@ export default function ProfilePage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="space-y-2">
                             <label className="block text-sm font-medium text-gray-700">Address Type</label>
-                            <select 
-                              value={formData.addresses[index].type} 
+                            <select
+                              value={formData.addresses[index].type}
                               onChange={(e) => handleAddressChange(index, 'type', e.target.value)}
                               className="w-full p-2 border rounded-md"
                             >
@@ -412,7 +414,7 @@ export default function ProfilePage() {
                               <option value="Other">Other</option>
                             </select>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <label className="block text-sm font-medium text-gray-700">Street Address</label>
                             <input
@@ -423,7 +425,7 @@ export default function ProfilePage() {
                               required
                             />
                           </div>
-                          
+
                           <div className="space-y-2">
                             <label className="block text-sm font-medium text-gray-700">City</label>
                             <input
@@ -434,7 +436,7 @@ export default function ProfilePage() {
                               required
                             />
                           </div>
-                          
+
                           <div className="space-y-2">
                             <label className="block text-sm font-medium text-gray-700">State</label>
                             <input
@@ -445,7 +447,7 @@ export default function ProfilePage() {
                               required
                             />
                           </div>
-                          
+
                           <div className="space-y-2">
                             <label className="block text-sm font-medium text-gray-700">ZIP Code</label>
                             <input
@@ -457,7 +459,7 @@ export default function ProfilePage() {
                             />
                           </div>
                         </div>
-                        
+
                         <div className="flex justify-end gap-3">
                           <button
                             onClick={handleCancel}
@@ -483,14 +485,14 @@ export default function ProfilePage() {
                             {address.isDefault && <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-md">Default</span>}
                           </div>
                           <div className="flex gap-2">
-                            <button 
+                            <button
                               onClick={() => setEditingAddressIndex(index)}
                               className="text-gray-500 hover:text-blue-600"
                             >
                               <Edit size={18} />
                             </button>
                             {formData.addresses.length > 1 && (
-                              <button 
+                              <button
                                 onClick={() => handleDeleteAddress(index)}
                                 className="text-gray-500 hover:text-red-600"
                               >
@@ -499,7 +501,7 @@ export default function ProfilePage() {
                             )}
                           </div>
                         </div>
-                        
+
                         <div className="flex items-start gap-3">
                           <MapPin size={20} className="text-gray-500 mt-1" />
                           <div>
@@ -507,9 +509,9 @@ export default function ProfilePage() {
                             <p>{address.city}, {address.state} {address.zipCode}</p>
                           </div>
                         </div>
-                        
+
                         {!address.isDefault && (
-                          <button 
+                          <button
                             onClick={() => handleSetDefaultAddress(index)}
                             className="mt-3 text-sm text-blue-600 hover:text-blue-800"
                           >
@@ -529,28 +531,28 @@ export default function ProfilePage() {
             )}
           </div>
         );
-      
+
       case 'avatar':
         return (
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Profile Picture</h2>
-            
+
             <div className="flex flex-col items-center justify-center py-8">
               <div className="relative mb-6">
-                <img 
-                  src={user.avatarUrl} 
-                  alt="Profile Avatar" 
+                <img
+                  src={user.avatarUrl}
+                  alt="Profile Avatar"
                   className="w-40 h-40 rounded-full object-cover border-4 border-gray-200"
                 />
                 <button className="absolute bottom-3 right-3 bg-blue-600 p-3 rounded-full text-white hover:bg-blue-700 shadow-md">
                   <Camera size={24} />
                 </button>
               </div>
-              
+
               <div className="text-center space-y-3">
                 <h3 className="text-xl font-semibold">{user.name}</h3>
                 <p className="text-gray-600">{user.email}</p>
-                
+
                 <div className="flex gap-3 mt-6 justify-center">
                   <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition">
                     Remove
@@ -559,7 +561,7 @@ export default function ProfilePage() {
                     Upload New
                   </button>
                 </div>
-                
+
                 <p className="text-sm text-gray-500 mt-4">
                   Recommended: Square image, at least 300x300 pixels.
                 </p>
@@ -567,14 +569,14 @@ export default function ProfilePage() {
             </div>
           </div>
         );
-      
+
         case 'settings':
         return (
           <div className="bg-white p-6 rounded-lg shadow-md">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Account Settings</h2>
               {isEditing ? null : (
-                <button 
+                <button
                   onClick={() => setIsEditing(true)}
                   className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
                 >
@@ -583,7 +585,7 @@ export default function ProfilePage() {
                 </button>
               )}
             </div>
-            
+
             {isEditing ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
@@ -593,65 +595,65 @@ export default function ProfilePage() {
                       <p className="text-sm text-gray-500">Receive order updates and account notices</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
-                        checked={formData.settings.emailNotifications} 
+                      <input
+                        type="checkbox"
+                        checked={formData.settings.emailNotifications}
                         onChange={() => handleSettingsChange('emailNotifications')}
-                        className="sr-only peer" 
+                        className="sr-only peer"
                       />
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                     </label>
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-4 border rounded-md">
                     <div>
                       <h3 className="font-medium">SMS Notifications</h3>
                       <p className="text-sm text-gray-500">Receive order and delivery updates via text</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
-                        checked={formData.settings.smsNotifications} 
+                      <input
+                        type="checkbox"
+                        checked={formData.settings.smsNotifications}
                         onChange={() => handleSettingsChange('smsNotifications')}
-                        className="sr-only peer" 
+                        className="sr-only peer"
                       />
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                     </label>
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-4 border rounded-md">
                     <div>
                       <h3 className="font-medium">Marketing Emails</h3>
                       <p className="text-sm text-gray-500">Receive deals, discounts and product updates</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
-                        checked={formData.settings.marketingEmails} 
+                      <input
+                        type="checkbox"
+                        checked={formData.settings.marketingEmails}
                         onChange={() => handleSettingsChange('marketingEmails')}
-                        className="sr-only peer" 
+                        className="sr-only peer"
                       />
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                     </label>
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-4 border rounded-md">
                     <div>
                       <h3 className="font-medium">Two-Factor Authentication</h3>
                       <p className="text-sm text-gray-500">Additional security for your account</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox" 
-                        checked={formData.settings.twoFactorAuth} 
+                      <input
+                        type="checkbox"
+                        checked={formData.settings.twoFactorAuth}
                         onChange={() => handleSettingsChange('twoFactorAuth')}
-                        className="sr-only peer" 
+                        className="sr-only peer"
                       />
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                     </label>
                   </div>
                 </div>
-                
+
                 <div className="mt-6 flex items-center gap-4">
                   <button
                     type="button"
@@ -659,9 +661,9 @@ export default function ProfilePage() {
                   >
                     Delete Account
                   </button>
-                  
+
                   <div className="flex-grow"></div>
-                  
+
                   <button
                     type="button"
                     onClick={handleCancel}
@@ -669,7 +671,7 @@ export default function ProfilePage() {
                   >
                     Cancel
                   </button>
-                  
+
                   <button
                     type="submit"
                     className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
@@ -690,7 +692,7 @@ export default function ProfilePage() {
                       {user.settings.emailNotifications ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-4 border rounded-md">
                     <div>
                       <h3 className="font-medium">SMS Notifications</h3>
@@ -700,7 +702,7 @@ export default function ProfilePage() {
                       {user.settings.smsNotifications ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-4 border rounded-md">
                     <div>
                       <h3 className="font-medium">Marketing Emails</h3>
@@ -710,7 +712,7 @@ export default function ProfilePage() {
                       {user.settings.marketingEmails ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center justify-between p-4 border rounded-md">
                     <div>
                       <h3 className="font-medium">Two-Factor Authentication</h3>
@@ -721,7 +723,7 @@ export default function ProfilePage() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="mt-6">
                   <button className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
                     Delete Account
@@ -731,56 +733,56 @@ export default function ProfilePage() {
             )}
           </div>
         );
-      
+
       default:
         return <div>Select a panel</div>;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen bg-gray-100 dark:bg-dark-bg-primary py-8 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-6">
           <div className="md:w-1/3">
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white dark:bg-dark-bg-secondary p-6 rounded-lg shadow-md">
               <div className="flex flex-col items-center">
                 <div className="relative mb-4">
-                  <img 
-                    src={user.avatarUrl} 
+                  <img
+                    src={user.avatarUrl}
                     alt={user.name}
-                    className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg" 
+                    className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                   />
                   <button className="absolute bottom-0 right-0 bg-blue-600 text-white p-1 rounded-full hover:bg-blue-700 transition">
                     <Camera size={16} />
                   </button>
                 </div>
-                <h1 className="text-xl font-bold">{user.name}</h1>
-                <p className="text-gray-500 text-sm">{user.email}</p>
+                <h1 className="text-xl font-bold dark:text-dark-text-primary">{user.name}</h1>
+                <p className="text-gray-500 dark:text-dark-text-tertiary text-sm">{user.email}</p>
               </div>
-              
+
               <div className="mt-6">
                 <nav className="space-y-2">
-                  <button 
+                  <button
                     onClick={() => setActivePanel('personal')}
-                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'personal' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-50'}`}>
+                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'personal' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'hover:bg-gray-50 dark:hover:bg-dark-bg-tertiary'}`}>
                     <User size={20} />
                     <span>Personal Details</span>
                   </button>
-                  <button 
+                  <button
                     onClick={() => setActivePanel('addresses')}
-                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'addresses' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-50'}`}>
+                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'addresses' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'hover:bg-gray-50 dark:hover:bg-dark-bg-tertiary'}`}>
                     <Home size={20} />
                     <span>Address</span>
                   </button>
-                  <button 
+                  <button
                     onClick={() => setActivePanel('avatar')}
-                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'avatar' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-50'}`}>
+                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'avatar' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'hover:bg-gray-50 dark:hover:bg-dark-bg-tertiary'}`}>
                     <Camera size={20} />
                     <span>Avatar</span>
                   </button>
-                  <button 
+                  <button
                     onClick={() => setActivePanel('settings')}
-                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'settings' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-50'}`}>
+                    className={`flex items-center gap-3 w-full p-3 rounded-md ${activePanel === 'settings' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'hover:bg-gray-50 dark:hover:bg-dark-bg-tertiary'}`}>
                     <Settings size={20} />
                     <span>Account Settings</span>
                   </button>
@@ -788,7 +790,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-          
+
           <div className="md:w-2/3">
             {renderPanel()}
           </div>

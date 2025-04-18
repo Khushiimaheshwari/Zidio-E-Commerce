@@ -13,6 +13,8 @@ import ShopPage from './pages/Shop_Page.jsx'
 import CollectionsPage from './pages/Collection_Page.jsx'
 import ProfilePage from './pages/Profile_Page.jsx'
 import WishlistPage from './pages/Wishlist_Page.jsx'
+import Orders_Page from './pages/Orders_Page.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
     {
       path: '/wishlist',
       element: <WishlistPage/>
+    },
+    {
+      path: '/orders',
+      element: <Orders_Page/>
     }
   ]}
 ])
@@ -57,7 +63,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
   </StrictMode>
 )

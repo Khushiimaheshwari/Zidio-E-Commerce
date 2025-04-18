@@ -1,34 +1,37 @@
-import React from 'react'
+import React from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 function Footer() {
-    return (
-       <div className=' bg-slate-950'>
-        {/* Newsletter Signup */}
-        <section className="container mx-auto bg-slate-950 px-4 mb-15">
-          <div className="bg-slate-800 rounded-xl p-8 md:p-12 border border-slate-700">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Subscribe for Exclusive Updates
-              </h2>
-              <p className="text-gray-300 mb-8">
-                Be the first to know about new Marvel collections, limited editions, and special offers.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  className="px-4 py-3 rounded-lg flex-grow focus:outline-none focus:ring-1 focus:ring-rose-400 bg-slate-700 text-white border border-slate-600"
-                />
-                <button className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-3 rounded-lg transition-colors">
-                  Subscribe
-                </button>
-              </div>
+  const { darkMode } = useTheme();
+
+  return (
+    <div className="bg-slate-950">
+      {/* Newsletter Signup */}
+      <section className="container mx-auto px-4 mb-15">
+        <div className="bg-slate-800 rounded-xl p-8 md:p-12 border border-slate-700">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Subscribe for Exclusive Updates
+            </h2>
+            <p className="text-gray-300 mb-8">
+              Be the first to know about new Marvel collections, limited editions, and special offers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="px-4 py-3 rounded-lg flex-grow focus:outline-none focus:ring-1 focus:ring-rose-400 bg-slate-700 text-white border border-slate-600"
+              />
+              <button className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-3 rounded-lg transition-colors">
+                Subscribe
+              </button>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Footer */}
-        <footer className=" bg-slate-950 text-white pt-12 pb-6">
+      {/* Footer Main */}
+      <footer className=" bg-slate-950 text-white pt-12 pb-6">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
               <div className='flex flex-col items-center'>
@@ -91,9 +94,9 @@ function Footer() {
             </div>
           </div>
         </footer>
-       </div>
-        
-    )
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;
+
