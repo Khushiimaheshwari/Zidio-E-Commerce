@@ -1,8 +1,11 @@
 import React from 'react'
+import { useTheme } from '../../context/ThemeContext'
 
 function Footer() {
+    const { darkMode } = useTheme();
+
     return (
-        <footer className=" bg-slate-950 text-white pt-12 pb-6">
+        <footer className="bg-slate-950 text-white pt-12 pb-6 transition-colors duration-300">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className='flex flex-col items-center'>

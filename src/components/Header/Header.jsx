@@ -11,7 +11,7 @@ function Header() {
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+
     const { isAuthenticated, user } = useSelector(state => state.auth);
     const cartCount = 3;
 
@@ -21,7 +21,7 @@ function Header() {
                 setIsDropdownOpen(false);
             }
         }
-        
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
@@ -32,7 +32,7 @@ function Header() {
         try {
             // Call your logout API if needed
             // await apiService.logout();
-            
+
             // Dispatch logout action to Redux
             dispatch(logout());
             setIsDropdownOpen(false);
@@ -43,17 +43,17 @@ function Header() {
     };
 
     return (
-        <header className='sticky top-0 z-10 w-full bg-slate-950 text-white shadow-md'>
+        <header className='sticky top-0 z-10 w-full bg-slate-950 text-white shadow-md transition-colors duration-300'>
             <Container>
                 <nav className='flex items-center justify-between py-4'>
                     {/* Mobile menu button */}
-                    <button 
+                    <button
                         className="md:hidden"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
                         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
-                    
+
                     {/* Logo */}
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center">
@@ -61,7 +61,7 @@ function Header() {
                             <img src="logo.png" width={"50"} alt="" />
                         </Link>
                     </div>
-                    
+
                     {/* Desktop navigation */}
                     <ul className="hidden md:flex items-center space-x-8">
                         <li>
@@ -74,13 +74,16 @@ function Header() {
                             <Link to="/collections" className="hover:text-lime-100 transition-colors font-medium">Collections</Link>
                         </li>
                         <li>
+                            <Link to="/orders" className="hover:text-lime-100 transition-colors font-medium">Orders</Link>
+                        </li>
+                        <li>
                             <Link to="/about" className="hover:text-lime-100 transition-colors font-medium">About</Link>
                         </li>
                         <li>
                             <Link to="/contact" className="hover:text-lime-100 transition-colors font-medium">Contact</Link>
                         </li>
                     </ul>
-                    
+
                     {/* Right side icons and buttons */}
                     <ul className="flex items-center space-x-4">
                         <li>
@@ -89,25 +92,25 @@ function Header() {
                             </button>
                         </li>
                         <li className="relative" ref={dropdownRef}>
-                            <button 
+                            <button
                                 className="hover:text-lime-100 transition-colors flex items-center"
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 onMouseEnter={() => setIsDropdownOpen(true)}
                             >
                                 <User size={20} />
                             </button>
-                            
+
                             {/* Dropdown menu */}
                             {isDropdownOpen && (
-                                <div 
-                                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20"
+                                <div
+                                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-bg-secondary rounded-md shadow-lg py-1 z-20"
                                     onMouseLeave={() => setIsDropdownOpen(false)}
                                 >
                                     {isAuthenticated ? (
                                         <>
                                             <Link
                                                 to="/profile"
-                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-dark-text-primary hover:bg-slate-100 dark:hover:bg-dark-bg-tertiary"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <User size={16} className="mr-2" />
@@ -115,7 +118,7 @@ function Header() {
                                             </Link>
                                             <Link
                                                 to="/wishlist"
-                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-dark-text-primary hover:bg-slate-100 dark:hover:bg-dark-bg-tertiary"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <Heart size={16} className="mr-2" />
@@ -123,14 +126,14 @@ function Header() {
                                             </Link>
                                             <Link
                                                 to="/orders"
-                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-dark-text-primary hover:bg-slate-100 dark:hover:bg-dark-bg-tertiary"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <Package size={16} className="mr-2" />
                                                 Orders
                                             </Link>
                                             <button
-                                                className="flex items-center w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                                className="flex items-center w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-dark-text-primary hover:bg-slate-100 dark:hover:bg-dark-bg-tertiary"
                                                 onClick={handleLogout}
                                             >
                                                 <LogOut size={16} className="mr-2" />
@@ -141,7 +144,7 @@ function Header() {
                                         <>
                                             <Link
                                                 to="/login"
-                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-dark-text-primary hover:bg-slate-100 dark:hover:bg-dark-bg-tertiary"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <LogIn size={16} className="mr-2" />
@@ -149,29 +152,29 @@ function Header() {
                                             </Link>
                                             <Link
                                                 to="/signup"
-                                                className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-700 dark:text-dark-text-primary hover:bg-slate-100 dark:hover:bg-dark-bg-tertiary"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <LogIn size={16} className="mr-2" />
                                                 Sign Up
                                             </Link>
-                                            <div className="border-t border-slate-100 my-1"></div>
-                                            <div className="px-4 py-2 text-xs text-slate-500">
+                                            <div className="border-t border-slate-100 dark:border-dark-bg-tertiary my-1"></div>
+                                            <div className="px-4 py-2 text-xs text-slate-500 dark:text-dark-text-tertiary">
                                                 Sign in to access:
                                             </div>
                                             <Link
                                                 to="/profile"
-                                                className="flex items-center px-4 py-2 text-sm text-slate-400"
+                                                className="flex items-center px-4 py-2 text-sm text-slate-400 dark:text-dark-text-tertiary"
                                                 onClick={() => setIsDropdownOpen(false)}
                                             >
                                                 <User size={16} className="mr-2" />
                                                 Profile
                                             </Link>
-                                            <div className="flex items-center px-4 py-2 text-sm text-slate-400">
+                                            <div className="flex items-center px-4 py-2 text-sm text-slate-400 dark:text-dark-text-tertiary">
                                                 <Heart size={16} className="mr-2" />
                                                 Wishlist
                                             </div>
-                                            <div className="flex items-center px-4 py-2 text-sm text-slate-400">
+                                            <div className="flex items-center px-4 py-2 text-sm text-slate-400 dark:text-dark-text-tertiary">
                                                 <Package size={16} className="mr-2" />
                                                 Orders
                                             </div>
@@ -181,7 +184,7 @@ function Header() {
                             )}
                         </li>
                         <li>
-                            <button 
+                            <button
                                 className="relative hover:text-lime-100 transition-colors"
                                 onClick={() => navigate("/cart")}
                             >
@@ -196,15 +199,15 @@ function Header() {
                     </ul>
                 </nav>
             </Container>
-            
+
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="md:hidden bg-gray-800 text-white">
+                <div className="md:hidden bg-gray-800 dark:bg-dark-bg-secondary text-white">
                     <Container>
                         <ul className="py-4 space-y-4">
                             <li>
-                                <Link 
-                                    to="/" 
+                                <Link
+                                    to="/"
                                     className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
@@ -212,8 +215,8 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link 
-                                    to="/shop" 
+                                <Link
+                                    to="/shop"
                                     className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
@@ -221,8 +224,8 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link 
-                                    to="/collections" 
+                                <Link
+                                    to="/collections"
                                     className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
@@ -230,8 +233,17 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link 
-                                    to="/about" 
+                                <Link
+                                    to="/orders"
+                                    className="block hover:text-lime-100 transition-colors"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    Orders
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/about"
                                     className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
@@ -239,8 +251,8 @@ function Header() {
                                 </Link>
                             </li>
                             <li>
-                                <Link 
-                                    to="/contact" 
+                                <Link
+                                    to="/contact"
                                     className="block hover:text-lime-100 transition-colors"
                                     onClick={() => setIsMenuOpen(false)}
                                 >

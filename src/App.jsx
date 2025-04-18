@@ -15,10 +15,12 @@ function App() {
   const isAvatarPage = location.pathname === "/avatar";
 
   return (
-    <div 
-      className={` w-full ${
-        isLoginPage || isSignUpPage ? "h-185 bg-gray-100" : "h-full bg-white"
-      }`}
+    <div
+      className={`w-full ${
+        isLoginPage || isSignUpPage
+          ? "h-185 dark:bg-dark-bg-primary"
+          : "h-full dark:bg-dark-bg-primary dark:text-dark-text-primary"
+      } transition-colors duration-300`}
     >
       <div className="w-full text-center">
         {isLoginPage ? (
