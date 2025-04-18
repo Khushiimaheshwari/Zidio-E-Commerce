@@ -9,7 +9,7 @@ const CollectionsPage = () => {
       id: 'avengers',
       name: 'The Avengers Collection',
       description: 'Assemble your wardrobe with our premium Avengers-inspired apparel. Features designs based on Earth\'s Mightiest Heroes.',
-      image: './HomePage/avengers_collection.jpg',
+      image: './HomePage/avenger_collection.jpg',
       productCount: 24,
       featured: true
     },
@@ -57,7 +57,7 @@ const CollectionsPage = () => {
       id: 'black-panther',
       name: 'Wakanda Forever',
       description: 'Honor the legacy of Wakanda with our Black Panther collection. Sleek designs inspired by vibranium technology.',
-      image: './HomePage/wakandaforever.jpg',
+      image: './HomePage/Wakandaforever.jpg',
       productCount: 12,
       featured: false
     },

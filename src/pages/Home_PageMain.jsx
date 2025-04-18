@@ -216,7 +216,7 @@ const Home_PageMain = () => {
               </button>
             </div>
             <div className="md:w-1/2 flex justify-center p">
-              <img src="./HomePage/avengers_collection.jpg" width={"550"} alt="Avengers Collection" className="rounded-lg shadow-lg" />
+              <img src="./HomePage/avenger_collection.jpg" width={"550"} alt="Avengers Collection" className="rounded-lg shadow-lg" />
             </div>
           </div>
         </div>
